@@ -66,10 +66,11 @@ p {
 }
 
 .start-button {
-  width: 90px;
-  height: 30px;
+  width: 70px;
+  height: 35px;
   background-color: #74cf75;
   border-radius: 7.5px;
+  border: solid black 1px;
   font-family: monospace;
   font-size: 16px;
 
