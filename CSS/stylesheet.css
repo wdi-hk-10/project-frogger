@@ -10,6 +10,13 @@ header {
   max-height: 97px;
 }
 
+.game-section {
+  position: relative;
+  left: 50%;
+  width: 800px;
+  margin-left: -400px;
+}
+
 p {
   font-family: monospace;
 }
@@ -22,22 +29,23 @@ p {
 .game {
   position: absolute;
   top: 170px;
-  height: 500px;
   width: 800px;
+  height: 500px;
   border: solid black 2px;
 }
 
 .finish {
-  height: 75px;
   width: 800px;
+  height: 75px;
   border: solid black 1px;
 }
 
 .start {
   position: relative;
   top: 348px;
-  height: 75px;
   width: 800px;
+  height: 75px;
+
   border: solid black 1px;
 }
 
@@ -68,17 +76,19 @@ p {
 .start-button {
   width: 70px;
   height: 35px;
+  font-family: monospace;
+  font-size: 16px;
   background-color: #74cf75;
   border-radius: 7.5px;
   border: solid black 1px;
-  font-family: monospace;
-  font-size: 16px;
+
 
 }
 
 footer {
   position: absolute;
+  top: 775px;
   left: 50%;
   margin-left: -85.82px;
-  top: 775px;
+
 }
