@@ -55,7 +55,7 @@ p {
 .frogger {
   position: absolute;
   top: 455px;
-  left: 5px;
+  left: 0px;
 }
 
 .game-info {
