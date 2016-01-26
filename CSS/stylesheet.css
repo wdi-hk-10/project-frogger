@@ -54,6 +54,8 @@ p {
 
 .frogger {
   position: absolute;
+  top: 455px;
+  left: 5px;
 }
 
 .game-info {
@@ -88,7 +90,6 @@ p {
   background-color: #74cf75;
   border-radius: 7.5px;
   border: solid black 1px;
-  outline: 0;
 }
 
 footer {
