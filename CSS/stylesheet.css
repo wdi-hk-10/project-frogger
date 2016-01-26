@@ -35,6 +35,8 @@ p {
 }
 
 .finish {
+  position: relative;
+  right: 1px;
   width: 800px;
   height: 50px;
   border: solid black 1px;
@@ -43,10 +45,15 @@ p {
 .start {
   position: relative;
   top: 398px;
+  right: 1px;
   width: 800px;
   height: 50px;
 
   border: solid black 1px;
+}
+
+.frogger {
+  position: absolute;
 }
 
 .game-info {
@@ -81,8 +88,7 @@ p {
   background-color: #74cf75;
   border-radius: 7.5px;
   border: solid black 1px;
-
-
+  outline: 0;
 }
 
 footer {
