@@ -55,6 +55,16 @@ p {
 .frogger {
   position: absolute;
   top: 455px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+
+.truck {
+  position: absolute;
+  top: 455px;
+  right: 0px;
+  bottom: 0px;
   left: 0px;
 }
 

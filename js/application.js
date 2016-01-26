@@ -2,19 +2,43 @@ $(document).ready(function() {
   console.log("Linked & Ready.")
 
   var $body = $('body');
-  var $frogger = $('.frogger');
+
+  var $frogger      = $('.frogger');
+  var froggerLeft   = parseInt($frogger.css('left'));
+  var froggerRight  = parseInt($frogger.css('width')) + froggerLeft;
+  var froggerTop    = parseInt($frogger.css('top'));
+  var froggerBottom = parseInt($frogger.css('height')) + froggerTop;
+  // switch to object?
+
 
   // start gameplay
   $('.start-button').on('click', function(){
+    // animate vehicles
+    $('.truck').animate({
+      left: "+=75px",
+    }, {
+      // set animation speed
+      duration: 50000,
+      // check for frogger collision
+      progress: function() {
+        var vehicleLeft   = parseInt($(this).css('left'));
+        var vehicleRight  = parseInt($(this).css('width')) + vehicleLeft;
+        var vehicleTop    = parseInt($(this).css('top'));
+        var vehicleBottom = parseInt($(this).css('height')) + vehicleTop;
+        console.log('vehicle', $(this).css(["top", "right", "bottom", "left"]));
+        if  ((vehicleLeft < froggerRight) && (vehicleRight > froggerLeft)
+          && (vehicleTop < froggerBottom) && (vehicleBottom > froggerTop)) {
+          console.log('boom!');
+        } else { console.log('safe')};
+      }
+    });
     moveFrogger();
   });
 
   // move frogger
   function moveFrogger() {
     $body.off().keydown(function(e) {
-      // check frogger is within game board
-      setBoundaries();
-      // move frogger
+      // move frogger + check frogger is within game board
       // prevent page scrolling with arrow keys
       if (e.keyCode == '38') {
         // up arrow
@@ -54,12 +78,7 @@ $(document).ready(function() {
         e.preventDefault();
       };
 
-    console.log($frogger.css(["top", "right", "bottom", "left"]));
+    console.log('frogger', $frogger.css(["top", "right", "bottom", "left"]));
     });
   };
-
-  function setBoundaries(){
-
-  }
-
 });
