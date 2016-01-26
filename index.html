@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Frogger</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" Dont get smooshed!="">
+    <meta name="JY" content="">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="js/application.js"></script>
+
+    <link href="css/stylesheet.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+      <img src="assets/logo.jpg">
+      <img class="pepe-the-frog" src="assets/pepe-the-frog.gif">
+    </header>
+
+    <div class="game-section">
+      <!-- direction for instructions -->
+      <div class="instructions">
+        <p>Hold 'command' for instructions</p>
+      </div>
+    <!-- game board -->
+      <section class="game">
+        <div class="finish"></div>
+        <div class="start">
+          <img class="frogger" src="assets/frogger-sprite.png">
+        </div>
+      </section>
+      <!-- game info -->
+      <section class="game-info">
+        <div class="player-info">
+          <div class="player">
+            <p>Player 1</p>
+            <img class="icon" src="assets/frog-icon.gif">
+            <img class="icon" src="assets/frog-icon.gif">
+            <img class="icon" src="assets/frog-icon.gif">
+            <p class="time">Best time 0:00</p>
+          </div>
+          <div class="player">
+            <p>Player 2</p>
+            <img class="icon" src="assets/frog-icon.gif">
+            <img class="icon" src="assets/frog-icon.gif">
+            <img class="icon" src="assets/frog-icon.gif">
+            <p class="time">Best time 0:00</p>
+        </div>
+        <div class="start-game">
+          <div class="counter"><p>Time 0:00</p></div>
+          <button type="button" class="start-button">start</button>
+        </div>
+      </section>
+    </div>
+
+    <footer><p><strong>Made for WDI HK | 2016</strong></p></footer>
+  </body>
+
+</html>

@@ -1,0 +1,94 @@
+header {
+  position: absolute;
+  display: inline;
+  left: 50%;
+  margin-top: 20px;
+  margin-left: -256.5px;
+}
+
+.pepe-the-frog {
+  max-height: 97px;
+}
+
+.game-section {
+  position: relative;
+  left: 50%;
+  width: 800px;
+  margin-left: -400px;
+}
+
+p {
+  font-family: monospace;
+}
+
+.instructions {
+  position: absolute;
+  top: 130px;
+}
+
+.game {
+  position: absolute;
+  top: 170px;
+  width: 800px;
+  height: 500px;
+  border: solid black 2px;
+}
+
+.finish {
+  width: 800px;
+  height: 50px;
+  border: solid black 1px;
+}
+
+.start {
+  position: relative;
+  top: 398px;
+  width: 800px;
+  height: 50px;
+
+  border: solid black 1px;
+}
+
+.game-info {
+    position: absolute;
+    top: 670px;
+    width: 800px;
+}
+
+.player * {
+  display: inline;
+}
+
+.icon {
+  margin-bottom: -25px;
+}
+
+.start-game {
+  float: right;
+  margin-top: -60px;
+}
+
+.counter, p {
+  margin-bottom: 6px;
+  margin-top: 12px;
+}
+
+.start-button {
+  width: 70px;
+  height: 35px;
+  font-family: monospace;
+  font-size: 16px;
+  background-color: #74cf75;
+  border-radius: 7.5px;
+  border: solid black 1px;
+
+
+}
+
+footer {
+  position: absolute;
+  top: 775px;
+  left: 50%;
+  margin-left: -85.82px;
+
+}
