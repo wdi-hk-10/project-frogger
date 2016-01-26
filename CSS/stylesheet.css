@@ -36,15 +36,15 @@ p {
 
 .finish {
   width: 800px;
-  height: 75px;
+  height: 50px;
   border: solid black 1px;
 }
 
 .start {
   position: relative;
-  top: 348px;
+  top: 398px;
   width: 800px;
-  height: 75px;
+  height: 50px;
 
   border: solid black 1px;
 }
