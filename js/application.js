@@ -131,6 +131,7 @@ $(document).ready(function() {
     if  ((vehicleLeft < froggerRight) && (vehicleRight > froggerLeft)
       && (vehicleTop < froggerBottom) && (vehicleBottom > froggerTop)) {
       // kill frogger
+      clearFroggerClass();
       $frogger.toggleClass('frogger-dead');
       $frogger.stop();
       // stop animation
@@ -147,7 +148,6 @@ $(document).ready(function() {
     // stop timer
     clearInterval(playTime);
     // calculate score
-    console.log(time);
     if ((playerTime == 0) && (time > 0)) {
       $('.player-time').text('0:' + time);
     } else if ((playerTime > 0 ) && (time < playerTime)) {
@@ -159,12 +159,15 @@ $(document).ready(function() {
   function moveFrogger() {
     $body.off().keydown(function(e) {
       // move frogger + check frogger is within game board
+      // set frogger direction
       // prevent page scrolling with arrow keys
       if (e.keyCode == '38') {
         // up arrow
         if (parseInt($frogger.css('top')) > 5) {
           $frogger.animate({ top: "-=50px" });
         };
+        clearFroggerClass();
+        $frogger.addClass('frogger-up');
         e.preventDefault();
 
       } else if (e.keyCode == '40') {
@@ -172,22 +175,19 @@ $(document).ready(function() {
         if (parseInt($frogger.css('top')) < 455) {
           $frogger.animate({ top: "+=50px" });
         };
+        clearFroggerClass();
+        $frogger.addClass('frogger-down');
         e.preventDefault();
 
       } else if (e.keyCode == '39') {
         // right arrow
         if (parseInt($frogger.css('left')) < 750) {
-          $frogger.animate({ left: "+=50px" });
+          $frogger.animate({
+            left: "+=50px"
+          });
         };
-          // WIP: hopping animation - CREATE CLASSES FOR FROGGER DIRECTION & HOP ANIMATION!
-          // } , {
-          //  step: function(now, fx) {
-          //     if (0.1 < fx.pos < 0.9) {
-          //       $(this).css('background-image', 'url("assets/frogger-jumping-sprite.png")');
-          //     } else if (fx.pos > 0.9) {
-          //       $(this).css('background-image', 'none');
-          //     }
-          //   }
+        clearFroggerClass();
+        $frogger.addClass('frogger-right');
         e.preventDefault();
 
       } else if (e.keyCode == '37') {
@@ -195,8 +195,15 @@ $(document).ready(function() {
         if (parseInt($frogger.css('left')) > 0) {
           $frogger.animate({ left: "-=50px" });
         };
+        clearFroggerClass();
+        $frogger.addClass('frogger-left');
         e.preventDefault();
       };
     });
   };
+
+  function clearFroggerClass() {
+    $frogger.removeClass('frogger-up frogger-right frogger-down frogger-left');
+  };
+
 });

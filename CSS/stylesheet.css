@@ -55,17 +55,40 @@ p {
 
 .frogger {
   position: absolute;
-  top: 455px;
+  top: 452.5px;
   right: 0px;
   bottom: 0px;
   left: 50px;
-  height: 39px;
+  height: 50px;
   width: 50px;
-  background-image: url("../assets/frogger-sprite.png");
 }
 
 .frogger-dead {
   background-image: url("../assets/frogger-dead.png");
+}
+
+.frogger-up {
+  height: 50px;
+  width: 50px;
+  background-image: url("../assets/frogger-sprite.png");
+}
+
+.frogger-right {
+  height: 50px;
+  width: 50px;
+  background-image: url("../assets/frogger-sprite-right.png")
+}
+
+.frogger-down {
+  height: 50px;
+  width: 50px;
+  background-image: url("../assets/frogger-sprite-down.png")
+}
+
+.frogger-left {
+  height: 50px;
+  width: 50px;
+  background-image: url("../assets/frogger-sprite-left.png")
 }
 
 .truck {
