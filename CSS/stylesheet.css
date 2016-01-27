@@ -1,5 +1,5 @@
 body {
-  background: black;
+  background: #141414;
 }
 
 header {
@@ -36,7 +36,7 @@ p {
   top: 170px;
   width: 800px;
   height: 500px;
-  background: white;
+  background: black;
   border: solid black 2px;
   overflow: hidden;
 }
@@ -46,7 +46,7 @@ p {
   right: 1px;
   width: 800px;
   height: 50px;
-  border: solid black 1px;
+  background: url("../assets/gameboard-finish.png");
 }
 
 .start {
@@ -55,8 +55,7 @@ p {
   right: 1px;
   width: 800px;
   height: 50px;
-
-  border: solid black 1px;
+  background: url("../assets/gameboard-start.png");
 }
 
 .frogger {
