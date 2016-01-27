@@ -66,7 +66,7 @@ p {
   top: 377.5px;
   right: 0px;
   bottom: 0px;
-  left: -192.5px;
+  left: -292.5px;
 }
 
 .truck-2 {
@@ -74,7 +74,15 @@ p {
   top: 377.5px;
   right: 0px;
   bottom: 0px;
-  left: -192.5px;
+  left: -292.5px;
+}
+
+.truck-3 {
+  position: absolute;
+  top: 377.5px;
+  right: 0px;
+  bottom: 0px;
+  left: -292.5px;
 }
 
 .game-info {

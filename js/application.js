@@ -1,9 +1,62 @@
 $(document).ready(function() {
   console.log("Linked & Ready.")
 
-  var $body = $('body');
-  var $frogger      = $('.frogger');
+  var $body    = $('body');
+  var $frogger = $('.frogger');
 
+  // start gameplay
+  $('.start-button').on('click', function(){
+    moveVehicles();
+    moveFrogger();
+  });
+
+  // animate vehicles
+  function moveVehicles() {
+    moveTruck();
+  };
+
+  function moveTruck() {
+    $('.truck').animate({
+      left: "+=1200px",
+    }, {
+      // set vehicle speed
+      duration: 5000,
+      complete: function() {
+        $(this).css('left', '-292.5px');
+        moveTruck();
+      },
+      // check for frogger collision
+      progress: collisionDetection
+    });
+
+    $('.truck-2').delay(1500).animate({
+      left: "+=1200px",
+    }, {
+      // set vehicle speed
+      duration: 4500,
+      complete: function() {
+        $(this).css('left', '-292.5px');
+        moveTruck();
+      },
+      // check for frogger collision
+      progress: collisionDetection
+    });
+
+    $('.truck-3').delay(3000).animate({
+      left: "+=1200px",
+    }, {
+      // set vehicle speed
+      duration: 4500,
+      complete: function() {
+        $(this).css('left', '-292.5px');
+        moveTruck();
+      },
+      // check for frogger collision
+      progress: collisionDetection
+    });
+  };
+
+  // detect collision between frogger and vehicles
   var collisionDetection = function() {
     // frogger location
     var froggerTop    = parseInt($frogger.css('top'));
@@ -20,31 +73,6 @@ $(document).ready(function() {
       && (vehicleTop < froggerBottom) && (vehicleBottom > froggerTop)) {
       console.log('boom!');
     } else { console.log('safe', froggerTop, froggerBottom, froggerLeft, froggerRight)};
-  };
-
-  // start gameplay
-  $('.start-button').on('click', function(){
-    moveVehicles();
-    moveFrogger();
-  });
-
-    // animate vehicles
-  function moveVehicles() {
-    $('.truck').animate({
-      left: "+=1000px",
-    }, {
-      // set vehicle speed
-      duration: 5000,
-      // check for frogger collision
-      progress: collisionDetection
-    });
-
-    $('.truck-2').delay(2500).animate({
-      left: "+=1000px",
-    }, {
-      duration: 5000,
-      progress: collisionDetection
-    });
   };
 
   // move frogger
