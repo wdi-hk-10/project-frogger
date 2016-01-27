@@ -4,12 +4,24 @@ $(document).ready(function() {
   var $body = $('body');
 
   var $frogger      = $('.frogger');
-  var froggerLeft   = parseInt($frogger.css('left'));
-  var froggerRight  = parseInt($frogger.css('width')) + froggerLeft;
-  var froggerTop    = parseInt($frogger.css('top'));
-  var froggerBottom = parseInt($frogger.css('height')) + froggerTop;
-  // switch to object?
 
+  var collisionDetection = function() {
+    // frogger location
+    var froggerTop    = parseInt($frogger.css('top'));
+    var froggerBottom = parseInt($frogger.css('height')) + froggerTop;
+    var froggerLeft   = parseInt($frogger.css('left'));
+    var froggerRight  = parseInt($frogger.css('width')) + froggerLeft;
+    // vehicle location
+    var vehicleLeft   = parseInt($(this).css('left'));
+    var vehicleRight  = parseInt($(this).css('width')) + vehicleLeft;
+    var vehicleTop    = parseInt($(this).css('top'));
+    var vehicleBottom = parseInt($(this).css('height')) + vehicleTop;
+    // detect for collision
+    if  ((vehicleLeft < froggerRight) && (vehicleRight > froggerLeft)
+      && (vehicleTop < froggerBottom) && (vehicleBottom > froggerTop)) {
+      console.log('boom!');
+    } else { console.log('safe', froggerTop, froggerBottom, froggerLeft, froggerRight)};
+  };
 
   // start gameplay
   $('.start-button').on('click', function(){
@@ -20,17 +32,7 @@ $(document).ready(function() {
       // set animation speed
       duration: 50000,
       // check for frogger collision
-      progress: function() {
-        var vehicleLeft   = parseInt($(this).css('left'));
-        var vehicleRight  = parseInt($(this).css('width')) + vehicleLeft;
-        var vehicleTop    = parseInt($(this).css('top'));
-        var vehicleBottom = parseInt($(this).css('height')) + vehicleTop;
-        console.log('vehicle', $(this).css(["top", "right", "bottom", "left"]));
-        if  ((vehicleLeft < froggerRight) && (vehicleRight > froggerLeft)
-          && (vehicleTop < froggerBottom) && (vehicleBottom > froggerTop)) {
-          console.log('boom!');
-        } else { console.log('safe')};
-      }
+      progress: collisionDetection
     });
     moveFrogger();
   });
@@ -77,8 +79,6 @@ $(document).ready(function() {
         };
         e.preventDefault();
       };
-
-    console.log('frogger', $frogger.css(["top", "right", "bottom", "left"]));
     });
   };
 });
