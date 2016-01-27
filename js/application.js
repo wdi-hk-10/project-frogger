@@ -26,7 +26,7 @@ $(document).ready(function() {
     if (time < 10) {
       time = '0' + time;
     }
-    $('.time').text("0:" + time);
+    $('.time').text(time);
   };
 
   // animate vehicles
@@ -150,9 +150,9 @@ $(document).ready(function() {
     clearInterval(playTime);
     // calculate score
     if ((playerTime == 0) && (time > 0)) {
-      $('.player-time').text('0:' + time);
+      $('.player-time').text(time);
     } else if ((playerTime > 0 ) && (time < playerTime)) {
-      $('.player-time').text('0:' + time);
+      $('.player-time').text(time);
     };
   }
 
