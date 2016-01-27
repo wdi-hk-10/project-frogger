@@ -15,45 +15,90 @@ $(document).ready(function() {
     moveTruck();
   };
 
+  // move row one of trucks, intiate row two
   function moveTruck() {
     $('.truck').animate({
-      left: "+=1200px",
+      left: "+=1000px",
     }, {
       // set vehicle speed
-      duration: 5000,
+      duration: 4500,
+      easing: "linear",
+      // loop vehicles
       complete: function() {
-        $(this).css('left', '-292.5px');
-        moveTruck();
+        $(this).css('left', '-192.5px');
+        moveTruckTwo();
       },
       // check for frogger collision
       progress: collisionDetection
     });
 
     $('.truck-2').delay(1500).animate({
-      left: "+=1200px",
+      left: "+=1000px",
+    }, {
+      duration: 4500,
+      easing: "linear",
+      complete: function() {
+        $(this).css('left', '-192.5px');
+      },
+      progress: collisionDetection
+    });
+
+    $('.truck-3').delay(3000).animate({
+      left: "+=1000px",
+    }, {
+      duration: 4500,
+      easing: "linear",
+      complete: function() {
+        $(this).css('left', '-192.5px');
+      },
+      progress: collisionDetection
+    });
+    console.log('truck1', $('.truck').css('left'));
+    console.log('truck2', $('.truck-2').css('left'));
+    console.log('truck3', $('.truck-3').css('left'));
+  };
+
+  // move row two of trucks, initiate row one
+  function moveTruckTwo() {
+    $('.truck-4').animate({
+      left: "+=1000px",
     }, {
       // set vehicle speed
       duration: 4500,
+      easing: "linear",
+      // loop vehicles
       complete: function() {
-        $(this).css('left', '-292.5px');
+        $(this).css('left', '-192.5px');
         moveTruck();
       },
       // check for frogger collision
       progress: collisionDetection
     });
 
-    $('.truck-3').delay(3000).animate({
-      left: "+=1200px",
+    $('.truck-5').delay(1500).animate({
+      left: "+=1000px",
     }, {
-      // set vehicle speed
       duration: 4500,
+      easing: "linear",
       complete: function() {
-        $(this).css('left', '-292.5px');
-        moveTruck();
+        $(this).css('left', '-192.5px');
       },
-      // check for frogger collision
       progress: collisionDetection
     });
+
+    $('.truck-6').delay(3000).animate({
+      left: "+=1000px",
+    }, {
+      duration: 4500,
+      easing: "linear",
+      complete: function() {
+        $(this).css('left', '-192.5px');
+      },
+      progress: collisionDetection
+    });
+    console.log('truck1', $('.truck').css('left'));
+    console.log('truck2', $('.truck-2').css('left'));
+    console.log('truck3', $('.truck-3').css('left'));
   };
 
   // detect collision between frogger and vehicles

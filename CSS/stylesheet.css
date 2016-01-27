@@ -32,7 +32,7 @@ p {
   width: 800px;
   height: 500px;
   border: solid black 2px;
-  /*overflow: hidden;*/
+  overflow: hidden;
 }
 
 .finish {
@@ -66,7 +66,7 @@ p {
   top: 377.5px;
   right: 0px;
   bottom: 0px;
-  left: -292.5px;
+  left: -192.5px;
 }
 
 .truck-2 {
@@ -74,7 +74,7 @@ p {
   top: 377.5px;
   right: 0px;
   bottom: 0px;
-  left: -292.5px;
+  left: -192.5px;
 }
 
 .truck-3 {
@@ -82,7 +82,31 @@ p {
   top: 377.5px;
   right: 0px;
   bottom: 0px;
-  left: -292.5px;
+  left: -192.5px;
+}
+
+.truck-4 {
+  position: absolute;
+  top: 377.5px;
+  right: 0px;
+  bottom: 0px;
+  left: -192.5px;
+}
+
+.truck-5 {
+  position: absolute;
+  top: 377.5px;
+  right: 0px;
+  bottom: 0px;
+  left: -192.5px;
+}
+
+.truck-6 {
+  position: absolute;
+  top: 377.5px;
+  right: 0px;
+  bottom: 0px;
+  left: -192.5px;
 }
 
 .game-info {
