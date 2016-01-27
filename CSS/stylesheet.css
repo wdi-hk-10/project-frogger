@@ -32,6 +32,7 @@ p {
   width: 800px;
   height: 500px;
   border: solid black 2px;
+  /*overflow: hidden;*/
 }
 
 .finish {
@@ -62,10 +63,18 @@ p {
 
 .truck {
   position: absolute;
-  top: 255px;
+  top: 377.5px;
   right: 0px;
   bottom: 0px;
-  left: 0px;
+  left: -192.5px;
+}
+
+.truck-2 {
+  position: absolute;
+  top: 377.5px;
+  right: 0px;
+  bottom: 0px;
+  left: -192.5px;
 }
 
 .game-info {

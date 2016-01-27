@@ -2,7 +2,6 @@ $(document).ready(function() {
   console.log("Linked & Ready.")
 
   var $body = $('body');
-
   var $frogger      = $('.frogger');
 
   var collisionDetection = function() {
@@ -25,17 +24,28 @@ $(document).ready(function() {
 
   // start gameplay
   $('.start-button').on('click', function(){
+    moveVehicles();
+    moveFrogger();
+  });
+
     // animate vehicles
+  function moveVehicles() {
     $('.truck').animate({
-      left: "+=75px",
+      left: "+=1000px",
     }, {
-      // set animation speed
-      duration: 50000,
+      // set vehicle speed
+      duration: 5000,
       // check for frogger collision
       progress: collisionDetection
     });
-    moveFrogger();
-  });
+
+    $('.truck-2').delay(2500).animate({
+      left: "+=1000px",
+    }, {
+      duration: 5000,
+      progress: collisionDetection
+    });
+  };
 
   // move frogger
   function moveFrogger() {
