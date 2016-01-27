@@ -2,7 +2,8 @@ $(document).ready(function() {
 
   var $body    = $('body');
   var $frogger = $('.frogger');
-  var time = parseFloat($('.time').text());
+  var time     = parseFloat($('.time').text());
+  var turn     = 0;
   var playTime;
 
   // start gameplay
@@ -11,6 +12,12 @@ $(document).ready(function() {
     moveVehicles();
     moveFrogger();
   });
+
+  // function playerTurn() {
+  //   if (turn % 2 === 0) {
+
+  //   }
+  // }
 
   var counter = function() {
     time++;
@@ -32,7 +39,7 @@ $(document).ready(function() {
       left: "+=1000px",
     }, {
       // set vehicle speed
-      duration: 9000,
+      duration: 12000,
       easing: "linear",
       // loop vehicles
       complete: function() {
@@ -43,10 +50,10 @@ $(document).ready(function() {
       progress: collisionDetection
     });
 
-    $('.truck-2').delay(3000).animate({
+    $('.truck-2').delay(4000).animate({
       left: "+=1000px",
     }, {
-      duration: 9000,
+      duration: 12000,
       easing: "linear",
       complete: function() {
         $(this).css('left', '-192.5px');
@@ -54,10 +61,10 @@ $(document).ready(function() {
       progress: collisionDetection
     });
 
-    $('.truck-3').delay(6000).animate({
+    $('.truck-3').delay(8000).animate({
       left: "+=1000px",
     }, {
-      duration: 9000,
+      duration: 12000,
       easing: "linear",
       complete: function() {
         $(this).css('left', '-192.5px');
@@ -72,7 +79,7 @@ $(document).ready(function() {
       left: "+=1000px",
     }, {
       // set vehicle speed
-      duration: 9000,
+      duration: 12000,
       easing: "linear",
       // loop vehicles
       complete: function() {
@@ -83,10 +90,10 @@ $(document).ready(function() {
       progress: collisionDetection
     });
 
-    $('.truck-5').delay(3000).animate({
+    $('.truck-5').delay(4000).animate({
       left: "+=1000px",
     }, {
-      duration: 9000,
+      duration: 12000,
       easing: "linear",
       complete: function() {
         $(this).css('left', '-192.5px');
@@ -94,7 +101,7 @@ $(document).ready(function() {
       progress: collisionDetection
     });
 
-    $('.truck-6').delay(6000).animate({
+    $('.truck-6').delay(8000).animate({
       left: "+=1000px",
     }, {
       duration: 9000,
@@ -128,8 +135,14 @@ $(document).ready(function() {
       $('.vehicle').stop(true);
       // stop counter
       clearInterval(playTime);
-    };
+    } else if (froggerTop <= 45) {
+      froggerWins();
+    }
   };
+
+  function froggerWins() {
+    console.log('wins!');
+  }
 
   // move frogger
   function moveFrogger() {
