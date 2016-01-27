@@ -137,9 +137,9 @@ $(document).ready(function() {
       $('.vehicle').stop(true);
       // stop counter
       clearInterval(playTime);
+    // detect for winner!
     } else if (froggerTop <= 45) {
       froggerWins();
-
     }
   };
 
