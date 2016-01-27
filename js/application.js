@@ -2,19 +2,30 @@ $(document).ready(function() {
 
   var $body    = $('body');
   var $frogger = $('.frogger');
+  var time = parseFloat($('.time').text());
+  var playTime;
 
   // start gameplay
   $('.start-button').on('click', function(){
+    playTime = setInterval(counter, 1000);
     moveVehicles();
     moveFrogger();
   });
+
+  var counter = function() {
+    time++;
+    if (time < 10) {
+      time = '0' + time;
+    }
+    $('.time').text("0:" + time);
+  };
 
   // animate vehicles
   function moveVehicles() {
     moveTruck();
   };
 
-  // TODO: make trucks 1-3 into their own functions
+  // TODO: use setInterval for each vehicle
   // move row one of trucks, intiate row two
   function moveTruck() {
     $('.truck').animate({
@@ -113,9 +124,10 @@ $(document).ready(function() {
       // kill frogger
       $frogger.toggleClass('frogger-dead');
       $frogger.stop();
+      // stop animation
       $('.vehicle').stop(true);
-      // end round
-      console.log($frogger, $(this));
+      // stop counter
+      clearInterval(playTime);
     };
   };
 

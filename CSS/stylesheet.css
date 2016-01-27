@@ -58,7 +58,7 @@ p {
   top: 455px;
   right: 0px;
   bottom: 0px;
-  left: 0px;
+  left: 50px;
   height: 39px;
   width: 50px;
   background-image: url("../assets/frogger-sprite.png");
@@ -136,13 +136,15 @@ p {
 }
 
 .counter, p {
-  margin-bottom: 6px;
   margin-top: 12px;
+  margin-bottom: 6px;
+  display: inline-block;
 }
 
 .start-button {
-  width: 70px;
-  height: 35px;
+  width: 100px;
+  height: 40px;
+  margin-left: 15px;
   font-family: monospace;
   font-size: 16px;
   background-color: #74cf75;
