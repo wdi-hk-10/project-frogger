@@ -132,6 +132,7 @@ $(document).ready(function() {
       && (vehicleTop < froggerBottom) && (vehicleBottom > froggerTop)) {
       // kill frogger
       clearFroggerClass();
+      $('.squash')[0].play();
       $frogger.toggleClass('frogger-dead');
       $frogger.stop();
       // stop animation
@@ -166,15 +167,17 @@ $(document).ready(function() {
         if (parseInt($frogger.css('top')) > 5) {
           $frogger.animate({ top: "-=50px" });
         };
+        $('.hop')[0].play();
         clearFroggerClass();
         $frogger.addClass('frogger-up');
         e.preventDefault();
 
       } else if (e.keyCode == '40') {
         // down arrow
-        if (parseInt($frogger.css('top')) < 455) {
+        if (parseInt($frogger.css('top')) < 452) {
           $frogger.animate({ top: "+=50px" });
         };
+        $('.hop')[0].play();
         clearFroggerClass();
         $frogger.addClass('frogger-down');
         e.preventDefault();
@@ -186,6 +189,7 @@ $(document).ready(function() {
             left: "+=50px"
           });
         };
+        $('.hop')[0].play();
         clearFroggerClass();
         $frogger.addClass('frogger-right');
         e.preventDefault();
@@ -195,6 +199,7 @@ $(document).ready(function() {
         if (parseInt($frogger.css('left')) > 0) {
           $frogger.animate({ left: "-=50px" });
         };
+        $('.hop')[0].play();
         clearFroggerClass();
         $frogger.addClass('frogger-left');
         e.preventDefault();

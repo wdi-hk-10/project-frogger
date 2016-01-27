@@ -1,9 +1,13 @@
+body {
+  background: black;
+}
+
 header {
   position: absolute;
   display: inline;
   left: 50%;
   margin-top: 20px;
-  margin-left: -256.5px;
+  margin-left: -257px;
 }
 
 .pepe-the-frog {
@@ -19,6 +23,7 @@ header {
 
 p {
   font-family: monospace;
+  color: yellow;
 }
 
 .instructions {
@@ -31,6 +36,7 @@ p {
   top: 170px;
   width: 800px;
   height: 500px;
+  background: white;
   border: solid black 2px;
   overflow: hidden;
 }
@@ -89,6 +95,12 @@ p {
   height: 50px;
   width: 50px;
   background-image: url("../assets/frogger-sprite-left.png")
+}
+
+.jumping-up {
+  height: 50px;
+  width: 50px;
+  background-image: url("../assets/frogger-jumping-up.png")
 }
 
 .truck {
