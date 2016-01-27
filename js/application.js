@@ -113,7 +113,7 @@ $(document).ready(function() {
       // kill frogger
       $frogger.toggleClass('frogger-dead');
       $frogger.stop();
-      $(this).stop(true);
+      $('.vehicle').stop(true);
       // end round
       console.log($frogger, $(this));
     };
