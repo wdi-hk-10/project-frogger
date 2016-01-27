@@ -1,13 +1,14 @@
 $(document).ready(function() {
 
-  var $body    = $('body');
-  var $frogger = $('.frogger');
-  var time     = parseFloat($('.time').text());
-  var turn     = 0;
+  var $body         = $('body');
+  var $frogger      = $('.frogger');
   var playTime;
+  var playerTime    = parseFloat($('.player-time').text());
+  var time          = parseFloat($('.time').text());
+  var turn          = 0;
 
   // start gameplay
-  $('.start-button').on('click', function(){
+  $('.start-button').one('click', function(){
     playTime = setInterval(counter, 1000);
     moveVehicles();
     moveFrogger();
@@ -19,6 +20,7 @@ $(document).ready(function() {
   //   }
   // }
 
+  // start timer
   var counter = function() {
     time++;
     if (time < 10) {
@@ -104,7 +106,7 @@ $(document).ready(function() {
     $('.truck-6').delay(8000).animate({
       left: "+=1000px",
     }, {
-      duration: 9000,
+      duration: 12000,
       easing: "linear",
       complete: function() {
         $(this).css('left', '-192.5px');
@@ -137,11 +139,20 @@ $(document).ready(function() {
       clearInterval(playTime);
     } else if (froggerTop <= 45) {
       froggerWins();
+
     }
   };
 
   function froggerWins() {
-    console.log('wins!');
+    // stop timer
+    clearInterval(playTime);
+    // calculate score
+    console.log(time);
+    if ((playerTime == 0) && (time > 0)) {
+      $('.player-time').text('0:' + time);
+    } else if ((playerTime > 0 ) && (time < playerTime)) {
+      $('.player-time').text('0:' + time);
+    };
   }
 
   // move frogger
