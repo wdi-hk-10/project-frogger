@@ -1,5 +1,4 @@
 $(document).ready(function() {
-  console.log("Linked & Ready.")
 
   var $body    = $('body');
   var $frogger = $('.frogger');
@@ -15,6 +14,7 @@ $(document).ready(function() {
     moveTruck();
   };
 
+  // TODO: make trucks 1-3 into their own functions
   // move row one of trucks, intiate row two
   function moveTruck() {
     $('.truck').animate({
@@ -53,9 +53,6 @@ $(document).ready(function() {
       },
       progress: collisionDetection
     });
-    console.log('truck1', $('.truck').css('left'));
-    console.log('truck2', $('.truck-2').css('left'));
-    console.log('truck3', $('.truck-3').css('left'));
   };
 
   // move row two of trucks, initiate row one
@@ -96,9 +93,6 @@ $(document).ready(function() {
       },
       progress: collisionDetection
     });
-    console.log('truck1', $('.truck').css('left'));
-    console.log('truck2', $('.truck-2').css('left'));
-    console.log('truck3', $('.truck-3').css('left'));
   };
 
   // detect collision between frogger and vehicles
@@ -116,8 +110,13 @@ $(document).ready(function() {
     // detect for collision
     if  ((vehicleLeft < froggerRight) && (vehicleRight > froggerLeft)
       && (vehicleTop < froggerBottom) && (vehicleBottom > froggerTop)) {
-      console.log('boom!');
-    } else { console.log('safe', froggerTop, froggerBottom, froggerLeft, froggerRight)};
+      // kill frogger
+      $frogger.toggleClass('frogger-dead');
+      $frogger.stop();
+      $(this).stop(true);
+      // end round
+      console.log($frogger, $(this));
+    };
   };
 
   // move frogger

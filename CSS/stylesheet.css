@@ -59,6 +59,13 @@ p {
   right: 0px;
   bottom: 0px;
   left: 0px;
+  height: 39px;
+  width: 50px;
+  background-image: url("../assets/frogger-sprite.png");
+}
+
+.frogger-dead {
+  background-image: url("../assets/frogger-dead.png");
 }
 
 .truck {
