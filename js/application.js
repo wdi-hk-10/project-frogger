@@ -1,38 +1,39 @@
 $(document).ready(function() {
 
-  var $body         = $('body');
-  var $frogger      = $('.frogger');
-  var $modalWins    = $('#win-modal');
-  var $modallose    = $('#lose-modal');
-  var playerTime    = parseFloat($('.player-time').text());
-  var time          = parseFloat($('.time').text());
-  var turn          = 0;
+  var $body       = $('body');
+  var $frogger    = $('.frogger');
+  var $modal      = $('.modal');
+  var $game       = $('.game');
+
+  var playerTime  = parseFloat($('.player-time').text());
+  var time        = parseFloat($('.time').text());
+  var turn        = 0;
 
   var moveCar;
+  var moveTrucks;
   var playTime;
 
-  // start gameplay
-  $('.start-button').one('click', function(){
-    // moveCar  = setInterval(car, 1000);
-    $('.start-sound')[0].play();
-    playTime = setInterval(counter, 1000);
-    moveVehicles();
-    moveFrogger();
-  });
+  var froggerAnimation = false;
 
-  function resetLoser() {
-    console.log('hi');
-    $modalWins.css('display', 'block');
+  function init() {
+    bindStartGame();
+  };
+
+  init();
+
+  // start gameplay
+  function bindStartGame() {
+    $('.start-button').one('click', function(){
+      // moveCar  = setInterval(car, 1000);
+      $('.start-sound')[0].play();
+      playTime = setInterval(counter, 1000);
+      moveVehicles();
+      moveFrogger();
+    });
   }
 
-  // animate cars
-  // var car = function() {
-  //   $('.car').css('')
-  //   .clone().appendTo()
-  // }
-
   // start timer
-  var counter = function() {
+  function counter() {
     time++;
     if (time < 10) {
       time = '0' + time;
@@ -42,13 +43,16 @@ $(document).ready(function() {
 
   // animate vehicles
   function moveVehicles() {
-    moveTruck();
+    generateTrucks()
+    moveTrucks = setInterval(generateTrucks, 4000);
   };
 
-  // TODO: use setInterval for each vehicle
-  // move row one of trucks, intiate row two
-  function moveTruck() {
-    $('.truck').animate({
+  function generateTrucks() {
+    var $newTruck = $('<img class="vehicle truck" src="assets/truck.png">');
+
+    $game.append($newTruck);
+
+    $newTruck.animate({
       left: "+=1000px",
     }, {
       // set vehicle speed
@@ -56,78 +60,15 @@ $(document).ready(function() {
       easing: "linear",
       // loop vehicles
       complete: function() {
-        $(this).css('left', '-192.5px');
-        moveTruckTwo();
+        $(this).css('left', '-192.5px').remove();
       },
       // check for frogger collision
       progress: collisionDetection
     });
-
-    $('.truck-2').delay(4000).animate({
-      left: "+=1000px",
-    }, {
-      duration: 12000,
-      easing: "linear",
-      complete: function() {
-        $(this).css('left', '-192.5px');
-      },
-      progress: collisionDetection
-    });
-
-    $('.truck-3').delay(8000).animate({
-      left: "+=1000px",
-    }, {
-      duration: 12000,
-      easing: "linear",
-      complete: function() {
-        $(this).css('left', '-192.5px');
-      },
-      progress: collisionDetection
-    });
-  };
-
-  // move row two of trucks, initiate row one
-  function moveTruckTwo() {
-    $('.truck-4').animate({
-      left: "+=1000px",
-    }, {
-      // set vehicle speed
-      duration: 12000,
-      easing: "linear",
-      // loop vehicles
-      complete: function() {
-        $(this).css('left', '-192.5px');
-        moveTruck();
-      },
-      // check for frogger collision
-      progress: collisionDetection
-    });
-
-    $('.truck-5').delay(4000).animate({
-      left: "+=1000px",
-    }, {
-      duration: 12000,
-      easing: "linear",
-      complete: function() {
-        $(this).css('left', '-192.5px');
-      },
-      progress: collisionDetection
-    });
-
-    $('.truck-6').delay(8000).animate({
-      left: "+=1000px",
-    }, {
-      duration: 12000,
-      easing: "linear",
-      complete: function() {
-        $(this).css('left', '-192.5px');
-      },
-      progress: collisionDetection
-    });
-  };
+  }
 
   // detect collision between frogger and vehicles
-  var collisionDetection = function() {
+  function collisionDetection() {
     // frogger location
     var froggerTop    = parseInt($frogger.css('top'));
     var froggerBottom = parseInt($frogger.css('height')) + froggerTop;
@@ -143,40 +84,17 @@ $(document).ready(function() {
     if  ((vehicleLeft < froggerRight) && (vehicleRight > froggerLeft)
       && (vehicleTop < froggerBottom) && (vehicleBottom > froggerTop)) {
       // kill frogger
-      clearFroggerClass();
-      $frogger.toggleClass('frogger-dead');
-      $('.squash')[0].play();
-      $frogger.stop();
-      $body.off('keydown');
+      stopFrogger('frogger-dead', '.squash', true, false)
       // stop animation
-      $('.vehicle').stop(true);
+      $('.vehicle').stop(true); // feat
       // stop counter
       clearInterval(playTime);
-      // display 'you lose' modal
-      resetLoser();
+      // display modal
+      resetGame();
 
-    // detect for winner!
-    } else if (froggerTop <= 45) {
-      froggerWins();
+    // detect for winner
     }
   };
-
-  function froggerWins() {
-    // show wins sprite + stop frogger animation
-    clearFroggerClass();
-    $frogger.addClass('frogger-wins');
-    $('.win-sound')[0].play();
-    $frogger.stop(false, true);
-    $body.off('keydown');
-    // stop timer
-    clearInterval(playTime);
-    // calculate score
-    if ((playerTime == 0) && (time > 0)) {
-      $('.player-time').text(time);
-    } else if ((playerTime > 0 ) && (time < playerTime)) {
-      $('.player-time').text(time);
-    };
-  }
 
   // move frogger
   function moveFrogger() {
@@ -186,18 +104,28 @@ $(document).ready(function() {
       // prevent page scrolling with arrow keys
 
       // hop upward
-      if (e.keyCode == '38') {
+      if (e.keyCode == '38' && !froggerAnimation) {
         if (parseInt($frogger.css('top')) > 5) {
           $frogger.animate({
             top: "-=50px"
           }, {
             duration: 'fast',
             start: function() {
+              froggerAnimating = true;
               $('.hop')[0].play();
               clearFroggerClass();
               $frogger.addClass('jumping-up');
             },
+            progress: function () {
+              var froggerTop = parseInt($frogger.css('top'));
+              if (froggerTop <= 45) {
+                froggerWins();
+              };
+            },
             complete: function() {
+              froggerAnimating = false;
+              $('.hop')[0].pause();
+              $('.hop')[0].currentTime = 0;
               clearFroggerClass();
               $frogger.addClass('frogger-up');
             }
@@ -206,18 +134,22 @@ $(document).ready(function() {
         e.preventDefault();
 
       // hop downward
-      } else if (e.keyCode == '40') {
+      } else if (e.keyCode == '40' && !froggerAnimation) {
         if (parseInt($frogger.css('top')) < 452) {
           $frogger.animate({
             top: "+=50px"
           }, {
             duration: 'fast',
             start: function() {
+              froggerAnimating = true;
               $('.hop')[0].play();
               clearFroggerClass();
               $frogger.addClass('jumping-down');
             },
             complete: function() {
+              froggerAnimating = false;
+              $('.hop')[0].pause();
+              $('.hop')[0].currentTime = 0;
               clearFroggerClass();
               $frogger.addClass('frogger-down');
             }
@@ -226,18 +158,22 @@ $(document).ready(function() {
         e.preventDefault();
 
       // hop right
-      } else if (e.keyCode == '39') {
+      } else if (e.keyCode == '39' && !froggerAnimation) {
         if (parseInt($frogger.css('left')) < 750) {
           $frogger.animate({
             left: "+=50px"
           }, {
             duration: 'fast',
             start: function() {
+              froggerAnimating = true;
               $('.hop')[0].play();
               clearFroggerClass();
               $frogger.addClass('jumping-right');
             },
             complete: function() {
+              froggerAnimating = false;
+              $('.hop')[0].pause();
+              $('.hop')[0].currentTime = 0;
               clearFroggerClass();
               $frogger.addClass('frogger-right');
             }
@@ -246,18 +182,22 @@ $(document).ready(function() {
         e.preventDefault();
 
       // hop left
-      } else if (e.keyCode == '37') {
+      } else if (e.keyCode == '37' && !froggerAnimation) {
         if (parseInt($frogger.css('left')) > 0) {
           $frogger.animate({
             left: "-=50px"
           }, {
             duration: 'fast',
             start: function() {
+              froggerAnimating = true;
               $('.hop')[0].play();
               clearFroggerClass();
               $frogger.addClass('jumping-left');
             },
             complete: function() {
+              froggerAnimating = false;
+              $('.hop')[0].pause();
+              $('.hop')[0].currentTime = 0;
               clearFroggerClass();
               $frogger.addClass('frogger-left');
             }
@@ -269,8 +209,40 @@ $(document).ready(function() {
     });
   };
 
+  function stopFrogger (toggleClass, sound, clearQueue, jumpToEnd) {
+    clearFroggerClass();
+    $frogger.addClass(toggleClass);
+    $(sound)[0].play();
+    $frogger.stop(clearQueue, jumpToEnd);
+    $body.off('keydown');
+  }
+
+  function froggerWins() {
+    // show wins sprite + stop frogger animation
+    stopFrogger('frogger-wins', '.win-sound', false, true)
+    // stop timer
+    clearInterval(playTime);
+
+    // calculate score
+    if ((playerTime == 0) && (time > 0)) {
+      $('.player-time').text(time);
+    } else if ((playerTime > 0 ) && (time < playerTime)) {
+      $('.player-time').text(time);
+    };
+    // display modal
+    resetGame();
+  }
+
   function clearFroggerClass() {
     $frogger.removeClass('frogger-up frogger-right frogger-down frogger-left jumping-up jumping-right jumping-down jumping-left');
   };
 
+  function resetGame() {
+    $modal.css('display', 'block');
+    if ($frogger.hasClass('frogger-dead')) {
+      $('.modal-content').append("<p>Frogger is dead!</p>");
+    } else {
+      $('.modal-content').append("<p>Frogger is alive!</p>")
+    }
+  }
 });

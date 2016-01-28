@@ -14,6 +14,10 @@ header {
   max-height: 97px;
 }
 
+.instructions p {
+  margin-top: 10px;
+}
+
 .game-section {
   position: relative;
   left: 50%;
@@ -25,28 +29,38 @@ header {
   display: none;
   position: relative;
   z-index: 1;
-  left: 0;
-  top: 0;
-  width: 500px;
-  height: 500px;
+  left: 200px;
+  top: 325px;
+  width: 400px;
+  height: 200px;
   background: black;
-  border: solid white 2px;
+  border: solid white 5px;
 }
 
 .modal-content {
-  margin: 15% auto;
+  margin-top: 50px;
+  background: black;
+  text-align: center;
+  font-size: 30px;
 }
 
-.close {
+.modal-content p {
+
+}
+
+.reset {
+  margin-left: 150px;
+  margin-top: 15px;
+  background: black;
   color: white;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: 900;
+  border: solid white 4px;
 }
 
 p {
   font-family: monospace;
-  color: #e6e705;
+  color: white;
 }
 
 .instructions {
@@ -222,8 +236,12 @@ p {
   margin-top: -50px;
 }
 
-.counter, p {
-  margin-top: 12px;
+.counter {
+  display: inline-block;
+}
+
+.counter p {
+  margin-top: 10px;
   margin-bottom: 6px;
   display: inline-block;
 }
@@ -232,10 +250,10 @@ p {
   width: 100px;
   height: 40px;
   margin-left: 15px;
+  margin-top: 10px;
   font-family: monospace;
   font-size: 16px;
   background-color: #1dc300;
-  border-radius: 7.5px;
   outline: none;
 }
 
