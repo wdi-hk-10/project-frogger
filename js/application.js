@@ -2,6 +2,8 @@ $(document).ready(function() {
 
   var $body         = $('body');
   var $frogger      = $('.frogger');
+  var $modalWins    = $('#win-modal');
+  var $modallose    = $('#lose-modal');
   var playerTime    = parseFloat($('.player-time').text());
   var time          = parseFloat($('.time').text());
   var turn          = 0;
@@ -12,10 +14,16 @@ $(document).ready(function() {
   // start gameplay
   $('.start-button').one('click', function(){
     // moveCar  = setInterval(car, 1000);
+    $('.start-sound')[0].play();
     playTime = setInterval(counter, 1000);
     moveVehicles();
     moveFrogger();
   });
+
+  function resetLoser() {
+    console.log('hi');
+    $modalWins.css('display', 'block');
+  }
 
   // animate cars
   // var car = function() {
@@ -130,19 +138,23 @@ $(document).ready(function() {
     var vehicleRight  = parseInt($(this).css('width')) + vehicleLeft;
     var vehicleTop    = parseInt($(this).css('top'));
     var vehicleBottom = parseInt($(this).css('height')) + vehicleTop;
+
     // detect for collision
     if  ((vehicleLeft < froggerRight) && (vehicleRight > froggerLeft)
       && (vehicleTop < froggerBottom) && (vehicleBottom > froggerTop)) {
       // kill frogger
       clearFroggerClass();
-      $('.squash')[0].play();
       $frogger.toggleClass('frogger-dead');
+      $('.squash')[0].play();
       $frogger.stop();
       $body.off('keydown');
       // stop animation
       $('.vehicle').stop(true);
       // stop counter
       clearInterval(playTime);
+      // display 'you lose' modal
+      resetLoser();
+
     // detect for winner!
     } else if (froggerTop <= 45) {
       froggerWins();
@@ -153,6 +165,7 @@ $(document).ready(function() {
     // show wins sprite + stop frogger animation
     clearFroggerClass();
     $frogger.addClass('frogger-wins');
+    $('.win-sound')[0].play();
     $frogger.stop(false, true);
     $body.off('keydown');
     // stop timer

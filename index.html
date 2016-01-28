@@ -26,6 +26,21 @@
     </header>
 
     <div class="game-section">
+      <!-- modals for win/lose + to reset game -->
+      <div id="win-modal" class="modal">
+        <div id="win-content" class="modal-content">
+          <span class="close">x</span>
+          <p>Frogger is safe!</p>
+        </div>
+      </div>
+
+      <div id="lose-modal" class="modal">
+        <div id="lose-content" class="modal-content">
+          <span class="close">x</span>
+          <p>Frogger is dead!</p>
+        </div>
+      </div>
+
       <!-- direction for instructions -->
       <div class="instructions">
         <p>Use arrow keys to hop Frogger</p>
@@ -69,8 +84,10 @@
 
     <footer><p><strong>Made for WDI HK | 2016</strong></p></footer>
 
+    <audio src="assets/frogger-start.wav" class="start-sound">
     <audio src="assets/frogger-hop.wav" class="hop">
     <audio src="assets/frogger-squash.wav" class="squash">
+    <audio src="assets/frogger-win.wav" class="win-sound">
 
   </body>
 

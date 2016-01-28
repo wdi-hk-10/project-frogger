@@ -21,6 +21,29 @@ header {
   margin-left: -400px;
 }
 
+.modal {
+  display: none;
+  position: relative;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 500px;
+  height: 500px;
+  background: black;
+  border: solid white 2px;
+}
+
+.modal-content {
+  margin: 15% auto;
+}
+
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
 p {
   font-family: monospace;
   color: #e6e705;
