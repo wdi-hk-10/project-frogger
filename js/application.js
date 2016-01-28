@@ -91,17 +91,13 @@ $(document).ready(function() {
       clearInterval(playTime);
       // display modal
       resetGame();
-
-    // detect for winner
     }
   };
 
   // move frogger
   function moveFrogger() {
     $body.off().keydown(function(e) {
-      // move frogger + check frogger is within game board
-      // set frogger direction
-      // prevent page scrolling with arrow keys
+      e.preventDefault();
 
       // hop upward
       if (e.keyCode == '38' && !froggerAnimation) {
@@ -111,11 +107,9 @@ $(document).ready(function() {
           }, {
             duration: 'fast',
             start: function() {
-              froggerAnimating = true;
-              $('.hop')[0].play();
-              clearFroggerClass();
-              $frogger.addClass('jumping-up');
+              startHop('jumping-up');
             },
+            // check for winning hop
             progress: function () {
               var froggerTop = parseInt($frogger.css('top'));
               if (froggerTop <= 45) {
@@ -123,15 +117,10 @@ $(document).ready(function() {
               };
             },
             complete: function() {
-              froggerAnimating = false;
-              $('.hop')[0].pause();
-              $('.hop')[0].currentTime = 0;
-              clearFroggerClass();
-              $frogger.addClass('frogger-up');
+              completeHop('frogger-up');
             }
           });
         };
-        e.preventDefault();
 
       // hop downward
       } else if (e.keyCode == '40' && !froggerAnimation) {
@@ -141,21 +130,13 @@ $(document).ready(function() {
           }, {
             duration: 'fast',
             start: function() {
-              froggerAnimating = true;
-              $('.hop')[0].play();
-              clearFroggerClass();
-              $frogger.addClass('jumping-down');
+              startHop('jumping-down');
             },
             complete: function() {
-              froggerAnimating = false;
-              $('.hop')[0].pause();
-              $('.hop')[0].currentTime = 0;
-              clearFroggerClass();
-              $frogger.addClass('frogger-down');
+              completeHop('frogger-down');
             }
           });
         };
-        e.preventDefault();
 
       // hop right
       } else if (e.keyCode == '39' && !froggerAnimation) {
@@ -165,21 +146,13 @@ $(document).ready(function() {
           }, {
             duration: 'fast',
             start: function() {
-              froggerAnimating = true;
-              $('.hop')[0].play();
-              clearFroggerClass();
-              $frogger.addClass('jumping-right');
+              startHop('jumping-right');
             },
             complete: function() {
-              froggerAnimating = false;
-              $('.hop')[0].pause();
-              $('.hop')[0].currentTime = 0;
-              clearFroggerClass();
-              $frogger.addClass('frogger-right');
+              completeHop('frogger-right');
             }
           });
         };
-        e.preventDefault();
 
       // hop left
       } else if (e.keyCode == '37' && !froggerAnimation) {
@@ -189,26 +162,35 @@ $(document).ready(function() {
           }, {
             duration: 'fast',
             start: function() {
-              froggerAnimating = true;
-              $('.hop')[0].play();
-              clearFroggerClass();
-              $frogger.addClass('jumping-left');
+              startHop('jumping-left');
             },
             complete: function() {
-              froggerAnimating = false;
-              $('.hop')[0].pause();
-              $('.hop')[0].currentTime = 0;
-              clearFroggerClass();
-              $frogger.addClass('frogger-left');
+              completeHop('frogger-left');
             }
           });
         };
-        $frogger.addClass('frogger-left');
-        e.preventDefault();
       };
     });
   };
 
+  // hop animation
+  function startHop(direction) {
+    froggerAnimation = true;
+    $('.hop')[0].play();
+    clearFroggerClass();
+    $frogger.addClass(direction);
+  }
+
+  // end hop animation
+  function completeHop(direction) {
+    froggerAnimation = false;
+    $('.hop')[0].pause();
+    $('.hop')[0].currentTime = 0;
+    clearFroggerClass();
+    $frogger.addClass(direction);
+  }
+
+  // animation for frogger win or die
   function stopFrogger (toggleClass, sound, clearQueue, jumpToEnd) {
     clearFroggerClass();
     $frogger.addClass(toggleClass);
