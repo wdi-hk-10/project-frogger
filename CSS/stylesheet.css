@@ -190,13 +190,13 @@ p {
   display: inline;
 }
 
-.icon {
-  margin-bottom: -25px;
+.player-info {
+  margin-top: 10px;
 }
 
 .start-game {
   float: right;
-  margin-top: -60px;
+  margin-top: -50px;
 }
 
 .counter, p {
