@@ -199,7 +199,7 @@ $(document).ready(function() {
     // detect for collision
     if  ((vehicleLeft < froggerRight) && (vehicleRight > froggerLeft)
       && (vehicleTop < froggerBottom) && (vehicleBottom > froggerTop)) {
-        lastHop('frogger-dead', '.squash', false, true);
+        lastHop('frogger-dead', '.squash', false, false);
         gameOver();
     };
   };
@@ -224,7 +224,7 @@ $(document).ready(function() {
               if (froggerTop <= 45) {
                 gameOver();
               } else {
-              completeHop('frogger-up');
+                completeHop('frogger-up');
               };
             }
           });
@@ -300,11 +300,10 @@ $(document).ready(function() {
 
   // win + die animation
   function lastHop (toggleClass, sound, clearQueue, jumpToEnd) {
-    froggerAnimation = false;
     clearFroggerClass();
     $frogger.addClass(toggleClass);
     $(sound)[0].play();
-    // $frogger.stop(clearQueue, jumpToEnd);
+    $frogger.stop(clearQueue, jumpToEnd);
     $body.off('keydown');
   }
 
@@ -325,7 +324,6 @@ $(document).ready(function() {
 
     // show game over modal
     $modal.css('display', 'block');
-
     // if frogger dies
     if ($frogger.hasClass('frogger-dead')) {
       $('.modal-content').append("<p class='status'>Frogger is dead!</p>");
@@ -353,6 +351,7 @@ $(document).ready(function() {
       clearFroggerClass();
       $frogger.removeAttr('style');
       $frogger.addClass('frogger-up');
+      froggerAnimation = false;
       // reset counter
       $('.time').text('00');
       time = parseFloat($('.time').text());
