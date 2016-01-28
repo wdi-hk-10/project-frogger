@@ -32,6 +32,7 @@ $(document).ready(function() {
       playTime = setInterval(counter, 1000);
       moveVehicles();
       moveFrogger();
+      resetGame();
     });
   }
 
@@ -46,18 +47,18 @@ $(document).ready(function() {
 
   // animate vehicles
   function moveVehicles() {
-    generateCarOne();
-    moveCarOne = setInterval(generateCarOne, 2000);
-    generateCarTwo();
-    moveCarTwo = setInterval(generateCarTwo, 1750);
+    // generateCarOne();
+    // moveCarOne = setInterval(generateCarOne, 2000);
+    // generateCarTwo();
+    // moveCarTwo = setInterval(generateCarTwo, 1750);
     generateCarThree();
     moveCarThree = setInterval(generateCarThree, 2000);
-    generateDozer();
-    moveDozer = setInterval(generateDozer, 2500);
-    generateDozerTwo();
-    moveDozerTwo = setInterval(generateDozerTwo, 2500);
-    generateTruck();
-    moveTruck = setInterval(generateTruck, 4500);
+    // generateDozer();
+    // moveDozer = setInterval(generateDozer, 2500);
+    // generateDozerTwo();
+    // moveDozerTwo = setInterval(generateDozerTwo, 2500);
+    // generateTruck();
+    // moveTruck = setInterval(generateTruck, 4500);
   };
 
 
@@ -197,15 +198,9 @@ $(document).ready(function() {
     // detect for collision
     if  ((vehicleLeft < froggerRight) && (vehicleRight > froggerLeft)
       && (vehicleTop < froggerBottom) && (vehicleBottom > froggerTop)) {
-      // kill frogger
-      stopFrogger('frogger-dead', '.squash', true, false)
-      // stop animation
-      $('.vehicle').stop(true); // feat
-      // stop gameplay
-      stopGame();
-      // display modal
-      gameOver();
-    }
+        lastHop('frogger-dead', '.squash', true, false);
+        gameOver();
+    };
   };
 
   // move frogger
@@ -226,7 +221,7 @@ $(document).ready(function() {
             complete: function() {
               var froggerTop = parseInt($frogger.css('top'));
               if (froggerTop <= 45) {
-                froggerWins();
+                gameOver();
               } else {
               completeHop('frogger-up');
               };
@@ -303,7 +298,7 @@ $(document).ready(function() {
   }
 
   // win + die animation
-  function stopFrogger (toggleClass, sound, clearQueue, jumpToEnd) {
+  function lastHop (toggleClass, sound, clearQueue, jumpToEnd) {
     clearFroggerClass();
     $frogger.addClass(toggleClass);
     $(sound)[0].play();
@@ -311,26 +306,13 @@ $(document).ready(function() {
     $body.off('keydown');
   }
 
-  function froggerWins() {
-    // show wins sprite + stop frogger animation
-    stopFrogger('frogger-wins', '.win-sound', false, true);
-    // calculate score
-    if ((playerTime == 0) && (time > 0)) {
-      $('.player-time').text(time);
-    } else if ((playerTime > 0 ) && (time < playerTime)) {
-      $('.player-time').text(time);
-    };
-    // stop gameplay
-    stopGame();
-    // display modal
-    gameOver();
-  };
-
   function clearFroggerClass() {
     $frogger.removeClass('frogger-up frogger-right frogger-down frogger-left jumping-up jumping-right jumping-down jumping-left');
   };
 
-  function stopGame() {
+  function gameOver() {
+    // stop animation + generating vehicles
+    $('.vehicle').stop(true);
     clearInterval(moveCarOne);
     clearInterval(moveCarTwo);
     clearInterval(moveCarThree);
@@ -338,14 +320,31 @@ $(document).ready(function() {
     clearInterval(moveDozerTwo);
     clearInterval(moveTruck);
     clearInterval(playTime);
-  };
 
-  function gameOver() {
+    // show game over modal
     $modal.css('display', 'block');
+
+    // if frogger dies
     if ($frogger.hasClass('frogger-dead')) {
       $('.modal-content').append("<p>Frogger is dead!</p>");
+
+    // if frogger wins
     } else {
-      $('.modal-content').append("<p>Frogger is alive!</p>")
+      lastHop('frogger-wins', '.win-sound', false, true);
+      $('.modal-content').append("<p>Frogger is alive!</p>");
     };
+
+    // calculate score
+    if ((playerTime == 0) && (time > 0)) {
+      $('.player-time').text(time);
+    } else if ((playerTime > 0 ) && (time < playerTime)) {
+      $('.player-time').text(time);
+    };
+  };
+
+  function resetGame() {
+    $('.reset').on('click', function() {
+
+    });
   };
 });
