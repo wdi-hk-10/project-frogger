@@ -4,10 +4,13 @@ $(document).ready(function() {
   var $frogger    = $('.frogger');
   var $modal      = $('.modal');
   var $game       = $('.game');
+  var $playerOne  = $('.player-one-time');
+  var $playerTwo  = $('.player-two-time');
 
-  var playerTime  = parseFloat($('.player-time').text());
+  var playerOneScore  = parseFloat($('.player-one-time').text());
+  var playerTwoScore  = parseFloat($('.player-two-time').text());
   var time        = parseFloat($('.time').text());
-  var turn        = 0;
+  var turn        = 6;
 
   var moveCarOne;
   var moveCarTwo;
@@ -58,8 +61,8 @@ $(document).ready(function() {
     // moveDozer = setInterval(generateDozer, 2500);
     // generateDozerTwo();
     // moveDozerTwo = setInterval(generateDozerTwo, 2500);
-    generateTruck();
-    moveTruck = setInterval(generateTruck, 4500);
+    // generateTruck();
+    // moveTruck = setInterval(generateTruck, 4500);
   };
 
 
@@ -311,6 +314,16 @@ $(document).ready(function() {
     $frogger.removeClass('frogger-up frogger-right frogger-down frogger-left jumping-up jumping-right jumping-down jumping-left frogger-dead frogger-wins');
   };
 
+  function getScore(playerScore, player) {
+    if ($frogger.hasClass('frogger-wins')) {
+      if (playerScore === 0) {
+        player.text(time);
+      } else if (time <= playerScore) {
+        player.text(time);
+      }
+    };
+  };
+
   function gameOver() {
     // stop animation + generating vehicles
     $('.vehicle').stop(true);
@@ -335,11 +348,14 @@ $(document).ready(function() {
     };
 
     // calculate score
-    if ((playerTime == 0) && (time > 0)) {
-      $('.player-time').text(time);
-    } else if ((playerTime > 0 ) && (time < playerTime)) {
-      $('.player-time').text(time);
-    };
+    if (turn % 6 == 0) {
+      getScore(playerOneScore, $playerOne);
+    } else {
+      getScore(playerTwoScore, $playerTwo);
+    }
+
+    // declare winner
+
   };
 
   function resetGame() {
@@ -358,6 +374,8 @@ $(document).ready(function() {
       // remove + reset modal
       $modal.css('display', 'none');
       $('.status').remove();
+      // change player turn
+      turn--;
       // reset gameplay
       init();
     });
