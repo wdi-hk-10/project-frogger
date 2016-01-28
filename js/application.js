@@ -9,8 +9,12 @@ $(document).ready(function() {
   var time        = parseFloat($('.time').text());
   var turn        = 0;
 
-  var moveCar;
-  var moveTrucks;
+  var moveCarOne;
+  var moveCarTwo;
+  var moveCarThree;
+  var moveDozer;
+  var moveDozerTwo;
+  var moveTruck;
   var playTime;
 
   var froggerAnimation = false;
@@ -24,7 +28,6 @@ $(document).ready(function() {
   // start gameplay
   function bindStartGame() {
     $('.start-button').one('click', function(){
-      // moveCar  = setInterval(car, 1000);
       $('.start-sound')[0].play();
       playTime = setInterval(counter, 1000);
       moveVehicles();
@@ -43,11 +46,122 @@ $(document).ready(function() {
 
   // animate vehicles
   function moveVehicles() {
-    generateTrucks()
-    moveTrucks = setInterval(generateTrucks, 4000);
+    generateCarOne();
+    moveCarOne = setInterval(generateCarOne, 2000);
+    generateCarTwo();
+    moveCarTwo = setInterval(generateCarTwo, 1750);
+    generateCarThree();
+    moveCarThree = setInterval(generateCarThree, 2000);
+    generateDozer();
+    moveDozer = setInterval(generateDozer, 2500);
+    generateDozerTwo();
+    moveDozerTwo = setInterval(generateDozerTwo, 2500);
+    generateTruck();
+    moveTruck = setInterval(generateTruck, 4500);
   };
 
-  function generateTrucks() {
+
+  function generateCarOne() {
+    var $newCar = $('<img class="vehicle car" src="assets/car.png">');
+
+    $game.append($newCar);
+
+    $newCar.delay(750).animate({
+      left: "+=855px",
+    }, {
+      // set vehicle speed
+      duration: 8000,
+      easing: "linear",
+      // loop vehicles
+      complete: function() {
+        $(this).css('left', '800px').remove();
+      },
+      // check for frogger collision
+      progress: collisionDetection
+    });
+  };
+
+  function generateCarTwo() {
+    var $newCar = $('<img class="vehicle car-2" src="assets/car2.png">');
+
+    $game.append($newCar);
+
+    $newCar.animate({
+      left: "-=850px",
+    }, {
+      // set vehicle speed
+      duration: 8000,
+      easing: "linear",
+      // loop vehicles
+      complete: function() {
+        $(this).css('left', '0px').remove();
+      },
+      // check for frogger collision
+      progress: collisionDetection
+    });
+  };
+
+  function generateCarThree() {
+    var $newCar = $('<img class="vehicle car-3" src="assets/car.png">');
+
+    $game.append($newCar);
+
+    $newCar.animate({
+      left: "+=850px",
+    }, {
+      // set vehicle speed
+      duration: 8000,
+      easing: "linear",
+      // loop vehicles
+      complete: function() {
+        $(this).css('left', '800px').remove();
+      },
+      // check for frogger collision
+      progress: collisionDetection
+    });
+  };
+
+  function generateDozer() {
+    var $newDozer = $('<img class="vehicle dozer" src="assets/dozer.png">');
+
+    $game.append($newDozer);
+
+    $newDozer.delay(750).animate({
+      left: "-=850px",
+    }, {
+      // set vehicle speed
+      duration: 9000,
+      easing: "linear",
+      // loop vehicles
+      complete: function() {
+        $(this).css('left', '0px').remove();
+      },
+      // check for frogger collision
+      progress: collisionDetection
+    });
+  };
+
+  function generateDozerTwo() {
+    var $newDozer = $('<img class="vehicle dozer-2" src="assets/dozer.png">');
+
+    $game.append($newDozer);
+
+    $newDozer.animate({
+      left: "-=850px",
+    }, {
+      // set vehicle speed
+      duration: 9000,
+      easing: "linear",
+      // loop vehicles
+      complete: function() {
+        $(this).css('left', '0px').remove();
+      },
+      // check for frogger collision
+      progress: collisionDetection
+    });
+  };
+
+  function generateTruck() {
     var $newTruck = $('<img class="vehicle truck" src="assets/truck.png">');
 
     $game.append($newTruck);
@@ -65,7 +179,7 @@ $(document).ready(function() {
       // check for frogger collision
       progress: collisionDetection
     });
-  }
+  };
 
   // detect collision between frogger and vehicles
   function collisionDetection() {
@@ -87,10 +201,10 @@ $(document).ready(function() {
       stopFrogger('frogger-dead', '.squash', true, false)
       // stop animation
       $('.vehicle').stop(true); // feat
-      // stop counter
-      clearInterval(playTime);
+      // stop gameplay
+      stopGame();
       // display modal
-      resetGame();
+      gameOver();
     }
   };
 
@@ -109,22 +223,20 @@ $(document).ready(function() {
             start: function() {
               startHop('jumping-up');
             },
-            // check for winning hop
-            progress: function () {
+            complete: function() {
               var froggerTop = parseInt($frogger.css('top'));
               if (froggerTop <= 45) {
                 froggerWins();
-              };
-            },
-            complete: function() {
+              } else {
               completeHop('frogger-up');
+              };
             }
           });
         };
 
       // hop downward
       } else if (e.keyCode == '40' && !froggerAnimation) {
-        if (parseInt($frogger.css('top')) < 452) {
+        if (parseInt($frogger.css('top')) < 449) {
           $frogger.animate({
             top: "+=50px"
           }, {
@@ -190,7 +302,7 @@ $(document).ready(function() {
     $frogger.addClass(direction);
   }
 
-  // animation for frogger win or die
+  // win + die animation
   function stopFrogger (toggleClass, sound, clearQueue, jumpToEnd) {
     clearFroggerClass();
     $frogger.addClass(toggleClass);
@@ -201,30 +313,39 @@ $(document).ready(function() {
 
   function froggerWins() {
     // show wins sprite + stop frogger animation
-    stopFrogger('frogger-wins', '.win-sound', false, true)
-    // stop timer
-    clearInterval(playTime);
-
+    stopFrogger('frogger-wins', '.win-sound', false, true);
     // calculate score
     if ((playerTime == 0) && (time > 0)) {
       $('.player-time').text(time);
     } else if ((playerTime > 0 ) && (time < playerTime)) {
       $('.player-time').text(time);
     };
+    // stop gameplay
+    stopGame();
     // display modal
-    resetGame();
-  }
+    gameOver();
+  };
 
   function clearFroggerClass() {
     $frogger.removeClass('frogger-up frogger-right frogger-down frogger-left jumping-up jumping-right jumping-down jumping-left');
   };
 
-  function resetGame() {
+  function stopGame() {
+    clearInterval(moveCarOne);
+    clearInterval(moveCarTwo);
+    clearInterval(moveCarThree);
+    clearInterval(moveDozer);
+    clearInterval(moveDozerTwo);
+    clearInterval(moveTruck);
+    clearInterval(playTime);
+  };
+
+  function gameOver() {
     $modal.css('display', 'block');
     if ($frogger.hasClass('frogger-dead')) {
       $('.modal-content').append("<p>Frogger is dead!</p>");
     } else {
       $('.modal-content').append("<p>Frogger is alive!</p>")
-    }
-  }
+    };
+  };
 });
