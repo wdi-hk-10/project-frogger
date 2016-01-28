@@ -27,6 +27,7 @@ $(document).ready(function() {
 
   // start gameplay
   function bindStartGame() {
+    // click start
     $('.start-button').one('click', function(){
       $('.start-sound')[0].play();
       playTime = setInterval(counter, 1000);
@@ -51,14 +52,14 @@ $(document).ready(function() {
     // moveCarOne = setInterval(generateCarOne, 2000);
     // generateCarTwo();
     // moveCarTwo = setInterval(generateCarTwo, 1750);
-    generateCarThree();
-    moveCarThree = setInterval(generateCarThree, 2000);
+    // generateCarThree();
+    // moveCarThree = setInterval(generateCarThree, 2000);
     // generateDozer();
     // moveDozer = setInterval(generateDozer, 2500);
     // generateDozerTwo();
     // moveDozerTwo = setInterval(generateDozerTwo, 2500);
-    // generateTruck();
-    // moveTruck = setInterval(generateTruck, 4500);
+    generateTruck();
+    moveTruck = setInterval(generateTruck, 4500);
   };
 
 
@@ -198,14 +199,14 @@ $(document).ready(function() {
     // detect for collision
     if  ((vehicleLeft < froggerRight) && (vehicleRight > froggerLeft)
       && (vehicleTop < froggerBottom) && (vehicleBottom > froggerTop)) {
-        lastHop('frogger-dead', '.squash', true, false);
+        lastHop('frogger-dead', '.squash', false, true);
         gameOver();
     };
   };
 
   // move frogger
   function moveFrogger() {
-    $body.off().keydown(function(e) {
+    $body.off().on("keydown", function(e) {
       e.preventDefault();
 
       // hop upward
@@ -299,15 +300,16 @@ $(document).ready(function() {
 
   // win + die animation
   function lastHop (toggleClass, sound, clearQueue, jumpToEnd) {
+    froggerAnimation = false;
     clearFroggerClass();
     $frogger.addClass(toggleClass);
     $(sound)[0].play();
-    $frogger.stop(clearQueue, jumpToEnd);
+    // $frogger.stop(clearQueue, jumpToEnd);
     $body.off('keydown');
   }
 
   function clearFroggerClass() {
-    $frogger.removeClass('frogger-up frogger-right frogger-down frogger-left jumping-up jumping-right jumping-down jumping-left');
+    $frogger.removeClass('frogger-up frogger-right frogger-down frogger-left jumping-up jumping-right jumping-down jumping-left frogger-dead frogger-wins');
   };
 
   function gameOver() {
@@ -326,12 +328,12 @@ $(document).ready(function() {
 
     // if frogger dies
     if ($frogger.hasClass('frogger-dead')) {
-      $('.modal-content').append("<p>Frogger is dead!</p>");
+      $('.modal-content').append("<p class='status'>Frogger is dead!</p>");
 
     // if frogger wins
     } else {
       lastHop('frogger-wins', '.win-sound', false, true);
-      $('.modal-content').append("<p>Frogger is alive!</p>");
+      $('.modal-content').append("<p class='status'>Frogger is alive!</p>");
     };
 
     // calculate score
@@ -343,8 +345,22 @@ $(document).ready(function() {
   };
 
   function resetGame() {
-    $('.reset').on('click', function() {
-
+    // click play again
+    $('.reset').off().on('click', function() {
+      // remove vehicles
+      $('.vehicle').remove();
+      // reset frogger
+      clearFroggerClass();
+      $frogger.removeAttr('style');
+      $frogger.addClass('frogger-up');
+      // reset counter
+      $('.time').text('00');
+      time = parseFloat($('.time').text());
+      // remove + reset modal
+      $modal.css('display', 'none');
+      $('.status').remove();
+      // reset gameplay
+      init();
     });
   };
 });
