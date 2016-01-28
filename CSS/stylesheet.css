@@ -7,7 +7,7 @@ header {
   display: inline;
   left: 50%;
   margin-top: 20px;
-  margin-left: -257px;
+  margin-left: -273.5px;
 }
 
 .pepe-the-frog {
@@ -23,7 +23,7 @@ header {
 
 p {
   font-family: monospace;
-  color: yellow;
+  color: #e6e705;
 }
 
 .instructions {
@@ -38,7 +38,7 @@ p {
   height: 500px;
   background: black;
   border: solid black 2px;
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 .finish {
@@ -72,6 +72,10 @@ p {
   background-image: url("../assets/frogger-dead.png");
 }
 
+.frogger-wins {
+  background-image: url("../assets/frogger-sprite-wins.png");
+}
+
 .frogger-up {
   height: 50px;
   width: 50px;
@@ -100,6 +104,24 @@ p {
   height: 50px;
   width: 50px;
   background-image: url("../assets/frogger-jumping-up.png")
+}
+
+.jumping-right {
+  height: 50px;
+  width: 50px;
+  background-image: url("../assets/frogger-jumping-right.png")
+}
+
+.jumping-down {
+  height: 50px;
+  width: 50px;
+  background-image: url("../assets/frogger-jumping-down.png")
+}
+
+.jumping-left {
+  height: 50px;
+  width: 50px;
+  background-image: url("../assets/frogger-jumping-left.png")
 }
 
 .truck {
@@ -150,6 +172,14 @@ p {
   left: -192.5px;
 }
 
+.car {
+  position: absolute;
+  top: 327.5px;
+  right: 0px;
+  bottom: 0px;
+  left: -50px;
+}
+
 .game-info {
     position: absolute;
     top: 670px;
@@ -181,7 +211,7 @@ p {
   margin-left: 15px;
   font-family: monospace;
   font-size: 16px;
-  background-color: #74cf75;
+  background-color: #71d171;
   border-radius: 7.5px;
   border: solid black 1px;
 }

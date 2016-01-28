@@ -2,22 +2,25 @@ $(document).ready(function() {
 
   var $body         = $('body');
   var $frogger      = $('.frogger');
-  var playTime;
   var playerTime    = parseFloat($('.player-time').text());
   var time          = parseFloat($('.time').text());
   var turn          = 0;
 
+  var moveCar;
+  var playTime;
+
   // start gameplay
   $('.start-button').one('click', function(){
+    // moveCar  = setInterval(car, 1000);
     playTime = setInterval(counter, 1000);
     moveVehicles();
     moveFrogger();
   });
 
-  // function playerTurn() {
-  //   if (turn % 2 === 0) {
-
-  //   }
+  // animate cars
+  // var car = function() {
+  //   $('.car').css('')
+  //   .clone().appendTo()
   // }
 
   // start timer
@@ -146,6 +149,10 @@ $(document).ready(function() {
   };
 
   function froggerWins() {
+    // show wins sprite + stop frogger animation
+    clearFroggerClass();
+    $frogger.addClass('frogger-wins');
+    $frogger.stop(false, true);
     // stop timer
     clearInterval(playTime);
     // calculate score
@@ -162,45 +169,85 @@ $(document).ready(function() {
       // move frogger + check frogger is within game board
       // set frogger direction
       // prevent page scrolling with arrow keys
+
+      // hop upward
       if (e.keyCode == '38') {
-        // up arrow
         if (parseInt($frogger.css('top')) > 5) {
-          $frogger.animate({ top: "-=50px" });
+          $frogger.animate({
+            top: "-=50px"
+          }, {
+            duration: 'fast',
+            start: function() {
+              $('.hop')[0].play();
+              clearFroggerClass();
+              $frogger.addClass('jumping-up');
+            },
+            complete: function() {
+              clearFroggerClass();
+              $frogger.addClass('frogger-up');
+            }
+          });
         };
-        $('.hop')[0].play();
-        clearFroggerClass();
-        $frogger.addClass('frogger-up');
         e.preventDefault();
 
+      // hop downward
       } else if (e.keyCode == '40') {
-        // down arrow
         if (parseInt($frogger.css('top')) < 452) {
-          $frogger.animate({ top: "+=50px" });
+          $frogger.animate({
+            top: "+=50px"
+          }, {
+            duration: 'fast',
+            start: function() {
+              $('.hop')[0].play();
+              clearFroggerClass();
+              $frogger.addClass('jumping-down');
+            },
+            complete: function() {
+              clearFroggerClass();
+              $frogger.addClass('frogger-down');
+            }
+          });
         };
-        $('.hop')[0].play();
-        clearFroggerClass();
-        $frogger.addClass('frogger-down');
         e.preventDefault();
 
+      // hop right
       } else if (e.keyCode == '39') {
-        // right arrow
         if (parseInt($frogger.css('left')) < 750) {
           $frogger.animate({
             left: "+=50px"
+          }, {
+            duration: 'fast',
+            start: function() {
+              $('.hop')[0].play();
+              clearFroggerClass();
+              $frogger.addClass('jumping-right');
+            },
+            complete: function() {
+              clearFroggerClass();
+              $frogger.addClass('frogger-right');
+            }
           });
         };
-        $('.hop')[0].play();
-        clearFroggerClass();
-        $frogger.addClass('frogger-right');
         e.preventDefault();
 
+      // hop left
       } else if (e.keyCode == '37') {
-        // left arrow
         if (parseInt($frogger.css('left')) > 0) {
-          $frogger.animate({ left: "-=50px" });
+          $frogger.animate({
+            left: "-=50px"
+          }, {
+            duration: 'fast',
+            start: function() {
+              $('.hop')[0].play();
+              clearFroggerClass();
+              $frogger.addClass('jumping-left');
+            },
+            complete: function() {
+              clearFroggerClass();
+              $frogger.addClass('frogger-left');
+            }
+          });
         };
-        $('.hop')[0].play();
-        clearFroggerClass();
         $frogger.addClass('frogger-left');
         e.preventDefault();
       };
@@ -208,7 +255,7 @@ $(document).ready(function() {
   };
 
   function clearFroggerClass() {
-    $frogger.removeClass('frogger-up frogger-right frogger-down frogger-left');
+    $frogger.removeClass('frogger-up frogger-right frogger-down frogger-left jumping-up jumping-right jumping-down jumping-left');
   };
 
 });
