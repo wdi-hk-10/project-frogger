@@ -211,9 +211,9 @@ p {
   margin-left: 15px;
   font-family: monospace;
   font-size: 16px;
-  background-color: #71d171;
+  background-color: #1dc300;
   border-radius: 7.5px;
-  border: solid black 1px;
+  outline: none;
 }
 
 footer {

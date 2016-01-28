@@ -138,6 +138,7 @@ $(document).ready(function() {
       $('.squash')[0].play();
       $frogger.toggleClass('frogger-dead');
       $frogger.stop();
+      $body.off('keydown');
       // stop animation
       $('.vehicle').stop(true);
       // stop counter
@@ -153,6 +154,7 @@ $(document).ready(function() {
     clearFroggerClass();
     $frogger.addClass('frogger-wins');
     $frogger.stop(false, true);
+    $body.off('keydown');
     // stop timer
     clearInterval(playTime);
     // calculate score
