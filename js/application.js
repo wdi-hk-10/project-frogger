@@ -61,8 +61,8 @@ $(document).ready(function() {
     // moveDozer = setInterval(generateDozer, 2500);
     // generateDozerTwo();
     // moveDozerTwo = setInterval(generateDozerTwo, 2500);
-    generateTruck();
-    moveTruck = setInterval(generateTruck, 4500);
+    // generateTruck();
+    // moveTruck = setInterval(generateTruck, 4500);
   };
 
 
@@ -311,17 +311,28 @@ $(document).ready(function() {
   }
 
   function clearFroggerClass() {
-    $frogger.removeClass('frogger-up frogger-right frogger-down frogger-left jumping-up jumping-right jumping-down jumping-left frogger-dead frogger-wins');
+    $frogger.removeClass('frogger-up frogger-right frogger-down frogger-left jumping-up');
+    $frogger.removeClass('jumping-right jumping-down jumping-left frogger-dead frogger-wins');
   };
 
-  function getScore(playerScore, player) {
+  // var playerOneScore  = parseFloat($('.player-one-time').text());
+  // var $playerTwo  = $('.player-two-time');
+  // getScore(playerTwoScore, $playerTwo);
+
+  function getScore(previousScore, player) {
+    var newScore = previousScore;
     if ($frogger.hasClass('frogger-wins')) {
-      if (playerScore === 0) {
+      console.log(previousScore, time);
+      if (previousScore === 0) {
         player.text(time);
-      } else if (time <= playerScore) {
+        newScore = time;
+      } else if (parseInt(time) < previousScore) {
         player.text(time);
+        newScore = time;
       }
-    };
+    }
+      console.log(playerOneScore);
+    return newScore;
   };
 
   function gameOver() {
@@ -350,13 +361,10 @@ $(document).ready(function() {
 
     // calculate score
     if (turn % 2 === 0) {
-      getScore(playerOneScore, $playerOne);
+      playerOneScore = getScore(playerOneScore, $playerOne);
     } else {
-      getScore(playerTwoScore, $playerTwo);
+      playerTwoScore = getScore(playerTwoScore, $playerTwo);
     }
-
-    // declare winner
-
   };
 
   function resetGame() {
@@ -382,9 +390,7 @@ $(document).ready(function() {
         $('.player-two *').css('color', 'white');
       } else {
         $('.player-two *').css('color', 'red');
-        console.log('red');
         $('.player-one *').css('color', 'white');
-        console.log('white');
       }
       // reset gameplay
       init();
