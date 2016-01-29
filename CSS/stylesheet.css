@@ -1,0 +1,215 @@
+body { background: #141414 }
+
+header {
+  position: absolute;
+  display: inline;
+  left: 50%;
+  margin-top: 20px;
+  margin-left: -273.5px;
+}
+
+.pepe-the-frog { max-height: 97px }
+
+.instructions p { margin-top: 10px }
+
+.game-section {
+  position: relative;
+  left: 50%;
+  width: 800px;
+  margin-left: -400px;
+}
+
+.modal {
+  display: none;
+  position: relative;
+  z-index: 1;
+  left: 200px;
+  top: 325px;
+  width: 400px;
+  height: 200px;
+  background: black;
+  border: solid white 5px;
+}
+
+.modal-content {
+  margin-top: 50px;
+  background: black;
+  text-align: center;
+  font-size: 30px;
+}
+
+.reset {
+  margin-left: 137.5px;
+  margin-top: 15px;
+  background: black;
+  color: white;
+  font-family: monospace;
+  font-size: 16px;
+  font-weight: 900;
+  border: solid white 4px;
+  outline: none;
+}
+
+p {
+  font-family: monospace;
+  color: white;
+}
+
+.instructions {
+  position: absolute;
+  top: 130px;
+}
+
+.game {
+  position: absolute;
+  top: 170px;
+  width: 800px;
+  height: 500px;
+  background: black;
+  border: solid black 2px;
+  overflow: hidden;
+}
+
+.finish {
+  position: relative;
+  right: 1px;
+  width: 800px;
+  height: 50px;
+  background: url("../assets/gameboard-finish.png");
+}
+
+.start {
+  position: relative;
+  top: 398px;
+  right: 1px;
+  width: 800px;
+  height: 50px;
+  background: url("../assets/gameboard-start.png");
+}
+
+.frogger {
+  position: absolute;
+  top: 450px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  height: 50px;
+  width: 50px;
+}
+
+.frogger-dead { background-image: url("../assets/frogger-dead.png") }
+
+.frogger-wins { background-image: url("../assets/frogger-sprite-wins.png") }
+
+.frogger-up { background-image: url("../assets/frogger-sprite.png") }
+
+.frogger-right { background-image: url("../assets/frogger-sprite-right.png") }
+
+.frogger-down { background-image: url("../assets/frogger-sprite-down.png") }
+
+.frogger-left { background-image: url("../assets/frogger-sprite-left.png") }
+
+.jumping-up { background-image: url("../assets/frogger-jumping-up.png") }
+
+.jumping-right { background-image: url("../assets/frogger-jumping-right.png") }
+
+.jumping-down { background-image: url("../assets/frogger-jumping-down.png") }
+
+.jumping-left { background-image: url("../assets/frogger-jumping-left.png") }
+
+.car {
+  position: absolute;
+  top: 250px;
+  right: 0px;
+  bottom: 0px;
+  left: -55px;
+}
+
+.car-2 {
+  position: absolute;
+  top: 300px;
+  right: 0px;
+  bottom: 0px;
+  left: 800px;
+}
+
+.car-3 {
+  position: absolute;
+  top: 49px;
+  right: 0px;
+  bottom: 0px;
+  left: -50px;
+}
+
+.dozer {
+  position: absolute;
+  top: 101px;
+  right: 0px;
+  bottom: 0px;
+  left: 800px;
+}
+
+.dozer-2 {
+  position: absolute;
+  top: 150px;
+  right: 0px;
+  bottom: 0px;
+  left: 800px;
+}
+
+.truck {
+  position: absolute;
+  top: 375px;
+  right: 0px;
+  bottom: 0px;
+  left: -192.5px;
+}
+
+.game-info {
+    position: absolute;
+    top: 670px;
+    width: 800px;
+}
+
+.player-one * {
+  margin-bottom: 5px;
+  display: inline;
+  color: #e6e603;
+}
+
+.player-two * { display: inline }
+
+.player-info { margin-top: 10px }
+
+.start-game {
+  float: right;
+  margin-top: -50px;
+}
+
+.counter { display: inline-block }
+
+.counter p {
+  margin-top: 10px;
+  margin-bottom: 6px;
+  display: inline-block;
+}
+
+.start-button {
+  width: 100px;
+  height: 40px;
+  margin-left: 15px;
+  margin-top: 10px;
+  font-family: monospace;
+  font-size: 16px;
+  background-color: #1dc300;
+  outline: none;
+  border-radius: 4px;
+}
+
+footer {
+  position: absolute;
+  top: 775px;
+  left: 50%;
+  margin-left: -85.82px;
+
+}

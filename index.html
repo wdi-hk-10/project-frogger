@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Frogger</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" Dont get smooshed!="">
+    <meta name="JY" content="">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="js/application.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <link href="css/stylesheet.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+      <img src="assets/frogger-logo.png">
+      <img class="pepe-the-frog" src="assets/pepe-the-frog.gif">
+    </header>
+
+    <div class="game-section">
+      <!-- modals for win/lose + to reset game -->
+      <div class="modal">
+        <div class="modal-content">
+        </div>
+        <button class="reset">Play Again</button>
+      </div>
+
+      <!-- direction for instructions -->
+      <div class="instructions">
+        <p>Use arrow keys to hop Frogger</p>
+      </div>
+      <!-- game board -->
+      <section class="game">
+        <!-- start and finish lines -->
+        <div class="finish"></div>
+        <div class="start"></div>
+        <!-- frogger -->
+        <div class="frogger frogger-up"></div>
+      </section>
+      <!-- game info -->
+      <section class="game-info">
+        <div class="player-info">
+          <div class="player-one">
+            <p>Player 1 | Best time </p>
+            <p class="player-one-time">00</p>
+          </div>
+          <div class="player-two">
+            <p>Player 2 | Best time </p>
+            <p class="player-two-time">00</p>
+          </div>
+        </div>
+        <div class="start-game">
+          <div class="counter">
+            <p>Time</p>
+            <p class="time">00</p>
+          </div>
+          <button type="button" class="start-button">start</button>
+        </div>
+      </section>
+    </div>
+
+    <footer><p><strong>Made for WDI HK | 2016</strong></p></footer>
+
+    <audio src="assets/frogger-start.wav" class="start-sound">
+    <audio src="assets/frogger-hop.wav" class="hop">
+    <audio src="assets/frogger-squash.wav" class="squash">
+    <audio src="assets/frogger-win.wav" class="win-sound">
+
+  </body>
+
+</html>
