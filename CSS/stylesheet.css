@@ -174,7 +174,7 @@ p {
 .player-one * {
   margin-bottom: 5px;
   display: inline;
-  color: red;
+  color: #e6e603;
 }
 
 .player-two * { display: inline }

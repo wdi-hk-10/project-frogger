@@ -51,18 +51,18 @@ $(document).ready(function() {
 
   // animate vehicles
   function moveVehicles() {
-    // generateCarOne();
-    // moveCarOne = setInterval(generateCarOne, 2000);
-    // generateCarTwo();
-    // moveCarTwo = setInterval(generateCarTwo, 1750);
-    // generateCarThree();
-    // moveCarThree = setInterval(generateCarThree, 2000);
-    // generateDozer();
-    // moveDozer = setInterval(generateDozer, 2500);
-    // generateDozerTwo();
-    // moveDozerTwo = setInterval(generateDozerTwo, 2500);
-    // generateTruck();
-    // moveTruck = setInterval(generateTruck, 4500);
+    generateCarOne();
+    moveCarOne = setInterval(generateCarOne, 2000);
+    generateCarTwo();
+    moveCarTwo = setInterval(generateCarTwo, 1750);
+    generateCarThree();
+    moveCarThree = setInterval(generateCarThree, 2000);
+    generateDozer();
+    moveDozer = setInterval(generateDozer, 2500);
+    generateDozerTwo();
+    moveDozerTwo = setInterval(generateDozerTwo, 2500);
+    generateTruck();
+    moveTruck = setInterval(generateTruck, 4500);
   };
 
 
@@ -204,7 +204,7 @@ $(document).ready(function() {
       && (vehicleTop < froggerBottom) && (vehicleBottom > froggerTop)) {
         lastHop('frogger-dead', '.squash', false, false);
         gameOver();
-    };
+    }
   };
 
   // move frogger
@@ -228,10 +228,10 @@ $(document).ready(function() {
                 gameOver();
               } else {
                 completeHop('frogger-up');
-              };
+              }
             }
           });
-        };
+        }
 
       // hop downward
       } else if (e.keyCode == '40' && !froggerAnimation) {
@@ -247,7 +247,7 @@ $(document).ready(function() {
               completeHop('frogger-down');
             }
           });
-        };
+        }
 
       // hop right
       } else if (e.keyCode == '39' && !froggerAnimation) {
@@ -263,7 +263,7 @@ $(document).ready(function() {
               completeHop('frogger-right');
             }
           });
-        };
+        }
 
       // hop left
       } else if (e.keyCode == '37' && !froggerAnimation) {
@@ -279,8 +279,8 @@ $(document).ready(function() {
               completeHop('frogger-left');
             }
           });
-        };
-      };
+        }
+      }
     });
   };
 
@@ -315,23 +315,17 @@ $(document).ready(function() {
     $frogger.removeClass('jumping-right jumping-down jumping-left frogger-dead frogger-wins');
   };
 
-  // var playerOneScore  = parseFloat($('.player-one-time').text());
-  // var $playerTwo  = $('.player-two-time');
-  // getScore(playerTwoScore, $playerTwo);
-
-  function getScore(previousScore, player) {
+  function calcScore(previousScore, player) {
     var newScore = previousScore;
     if ($frogger.hasClass('frogger-wins')) {
-      console.log(previousScore, time);
       if (previousScore === 0) {
         player.text(time);
         newScore = time;
-      } else if (parseInt(time) < previousScore) {
+      } else if (time < previousScore) {
         player.text(time);
         newScore = time;
       }
     }
-      console.log(playerOneScore);
     return newScore;
   };
 
@@ -357,13 +351,13 @@ $(document).ready(function() {
     } else {
       lastHop('frogger-wins', '.win-sound', false, true);
       $('.modal-content').append("<p class='status'>Frogger is alive!</p>");
-    };
+    }
 
     // calculate score
     if (turn % 2 === 0) {
-      playerOneScore = getScore(playerOneScore, $playerOne);
+      playerOneScore = calcScore(playerOneScore, $playerOne);
     } else {
-      playerTwoScore = getScore(playerTwoScore, $playerTwo);
+      playerTwoScore = calcScore(playerTwoScore, $playerTwo);
     }
   };
 
@@ -386,10 +380,10 @@ $(document).ready(function() {
       // change player turn
       turn++;
       if (turn % 2 === 0) {
-        $('.player-one *').css('color', 'red');
+        $('.player-one *').css('color', '#e6e603');
         $('.player-two *').css('color', 'white');
       } else {
-        $('.player-two *').css('color', 'red');
+        $('.player-two *').css('color', '#e6e603');
         $('.player-one *').css('color', 'white');
       }
       // reset gameplay
