@@ -10,7 +10,7 @@ $(document).ready(function() {
   var playerOneScore  = parseFloat($('.player-one-time').text());
   var playerTwoScore  = parseFloat($('.player-two-time').text());
   var time        = parseFloat($('.time').text());
-  var turn        = 6;
+  var turn        = 0;
 
   var moveCarOne;
   var moveCarTwo;
@@ -61,8 +61,8 @@ $(document).ready(function() {
     // moveDozer = setInterval(generateDozer, 2500);
     // generateDozerTwo();
     // moveDozerTwo = setInterval(generateDozerTwo, 2500);
-    // generateTruck();
-    // moveTruck = setInterval(generateTruck, 4500);
+    generateTruck();
+    moveTruck = setInterval(generateTruck, 4500);
   };
 
 
@@ -337,6 +337,7 @@ $(document).ready(function() {
 
     // show game over modal
     $modal.css('display', 'block');
+
     // if frogger dies
     if ($frogger.hasClass('frogger-dead')) {
       $('.modal-content').append("<p class='status'>Frogger is dead!</p>");
@@ -348,7 +349,7 @@ $(document).ready(function() {
     };
 
     // calculate score
-    if (turn % 6 == 0) {
+    if (turn % 2 === 0) {
       getScore(playerOneScore, $playerOne);
     } else {
       getScore(playerTwoScore, $playerTwo);
@@ -375,7 +376,16 @@ $(document).ready(function() {
       $modal.css('display', 'none');
       $('.status').remove();
       // change player turn
-      turn--;
+      turn++;
+      if (turn % 2 === 0) {
+        $('.player-one *').css('color', 'red');
+        $('.player-two *').css('color', 'white');
+      } else {
+        $('.player-two *').css('color', 'red');
+        console.log('red');
+        $('.player-one *').css('color', 'white');
+        console.log('white');
+      }
       // reset gameplay
       init();
     });
